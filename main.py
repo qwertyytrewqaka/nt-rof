@@ -5,7 +5,7 @@ import constants
 
 
 def nt_notify():
-    with requests.get("https://newtoki106.com/toki_free", headers=constants.headers) as req:
+    with requests.get("https://newtoki101.com/toki_free", headers=constants.headers) as req:
         html = req.text
         soup = BeautifulSoup(html, 'html.parser')
         posts = soup.select("#list-body > li")
@@ -15,9 +15,9 @@ def nt_notify():
                 break
         number = posts[constants.latest_number].select("div.wr-num.hidden-xs")[0].text
         time = posts[constants.latest_number].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
-        downloads = posts[constants.latest_number].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
-        title = posts[constants.latest_number].select("div.wr-subject > a")[0].text.partition("  ")[2].rpartition(" ")[0]
-        member = posts[constants.latest_number].select("div.wr-name.hidden-xs > a > span")[0].text[1:].lstrip()
+        downloads = posts[constants.latest_number].select("div.wr-down.hidden-xs")[0].text[2:].rstrip().lstrip()
+        title = posts[constants.latest_number].select("div.wr-subject > a")[0].text[8:-4].replace("	", "").lstrip().rstrip()
+        member = posts[constants.latest_number].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
         category = posts[constants.latest_number].select("div.wr-subject > a > span.tack-icon")[0].text
         link = posts[constants.latest_number].select("div.wr-subject > a")[0]['href']
 
@@ -39,35 +39,35 @@ def nt_notify():
                                                        "번째 새 글이 올라왔어요!" + "\n" + "분류: 공유, " +  "다운로드 수" + ": " + downloads)
                         print(number, "번째", "새 공유탭 글이 올라옴")
 
-            if 20 > int(downloads) > 0 and link not in constants.history and category != "공유":
+            if 50 > int(downloads) > 0 and link not in constants.history and category != "공유":
                 constants.history.insert(0, link)
                 constants.history.pop()
                 print(constants.history)
                 constants.bot.sendMessage(constants.chat_id,
                                           text=time + ": " + member + "님의 "
-                                               + str(number) + "번째 새 글이 올라왔어요!" + "\n" + 
+                                               + str(number) + "번째 새 글이 올라왔어요!" + "\n" +
                                                "첫번째 글, " + "분류: " + category + ", " + "다운로드 수" + ": " + downloads
                                                + "\n" + "제목: " + title)
                 print(number, "번째", "새 공유탭에 없는 공유글이 올라옴(1번째글)", "분류: ", category)
 
             number = posts[constants.latest_number+1].select("div.wr-num.hidden-xs")[0].text
             time = posts[constants.latest_number+1].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
-            downloads = posts[constants.latest_number+1].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
-            title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text.partition("  ")[2].rpartition(" ")[0]
-            member = posts[constants.latest_number+1].select("div.wr-name.hidden-xs > a > span")[0].text[1:].lstrip()
+            downloads = posts[constants.latest_number+1].select("div.wr-down.hidden-xs")[0].text[2:].rstrip().lstrip()
+            title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text[8:-4].replace("	", "").lstrip().rstrip()
+            member = posts[constants.latest_number+1].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
             category = posts[constants.latest_number+1].select("div.wr-subject > a > span.tack-icon")[0].text
             link = posts[constants.latest_number+1].select("div.wr-subject > a")[0]['href']
 
             print("두번째:", number, time, downloads, title, member, category, link)
 
-            if 20 > int(downloads) > 0 and link not in constants.history and category != "공유" and not (
+            if 50 > int(downloads) > 0 and link not in constants.history and category != "공유" and not (
                     time[-2] == '분' and int(time[:-2]) > 10):
                 constants.history.insert(0, link)
                 constants.history.pop()
                 print(constants.history)
                 constants.bot.sendMessage(constants.chat_id,
                                           text=time + ": " + member + "님의 "
-                                               + str(number) + "번째 새 글이 올라왔어요!" + "\n" + 
+                                               + str(number) + "번째 새 글이 올라왔어요!" + "\n" +
                                                "두번째 글, " + "분류: " + category + ", " + "다운로드 수" + ": " + downloads
                                                + "\n" + "제목: " + title)
 
