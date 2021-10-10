@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import os
 import constants
 
-
 def nt_notify():
     with requests.get("https://newtoki107.com/toki_free", headers=constants.headers) as req:
         html = req.text
@@ -15,11 +14,13 @@ def nt_notify():
                 break
         number = posts[constants.latest_number].select("div.wr-num.hidden-xs")[0].text
         time = posts[constants.latest_number].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
-        downloads = posts[constants.latest_number].select("div.wr-down.hidden-xs")[0].text[2:].rstrip().lstrip()
-        title = posts[constants.latest_number].select("div.wr-subject > a")[0].text[8:-4].replace("	", "").lstrip().rstrip()
+        downloads = posts[constants.latest_number].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
+        title = posts[constants.latest_number].select("div.wr-subject > a")[0].text[9:-3].replace("	", "").lstrip().rstrip()
         member = posts[constants.latest_number].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
         category = posts[constants.latest_number].select("div.wr-subject > a > span.tack-icon")[0].text
         link = posts[constants.latest_number].select("div.wr-subject > a")[0]['href']
+
+        print(title)
 
         print("첫번째:", number, time, downloads, title, member, category, link)
 
@@ -52,8 +53,8 @@ def nt_notify():
 
             number = posts[constants.latest_number+1].select("div.wr-num.hidden-xs")[0].text
             time = posts[constants.latest_number+1].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
-            downloads = posts[constants.latest_number+1].select("div.wr-down.hidden-xs")[0].text[2:].rstrip().lstrip()
-            title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text[8:-4].replace("	", "").lstrip().rstrip()
+            downloads = posts[constants.latest_number+1].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
+            title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text[9:-3].replace("	", "").lstrip().rstrip()
             member = posts[constants.latest_number+1].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
             category = posts[constants.latest_number+1].select("div.wr-subject > a > span.tack-icon")[0].text
             link = posts[constants.latest_number+1].select("div.wr-subject > a")[0]['href']
@@ -72,7 +73,6 @@ def nt_notify():
                                                + "\n" + "제목: " + title)
 
                 print(number, "번째", "새 공유탭에 없는 공유글이 올라옴(2번째글)", "분류: ", category)
-
 
 def main():
     try:
@@ -97,4 +97,3 @@ def main():
                 constants.bot.sendMessage(constants.chat_id, text="서버 오류/기타 문제 해결됨")
 
         constants.server_state = 0
-
