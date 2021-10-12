@@ -15,7 +15,7 @@ def nt_notify():
         number = posts[constants.latest_number].select("div.wr-num.hidden-xs")[0].text
         time = posts[constants.latest_number].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
         downloads = posts[constants.latest_number].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
-        title = posts[constants.latest_number].select("div.wr-subject > a")[0].text[9:-3].replace("	", "").lstrip().rstrip()
+        title = posts[constants.latest_number].select("div.wr-subject > a")[0].text[5:-1].replace("	", "").lstrip().rstrip()
         member = posts[constants.latest_number].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
         category = posts[constants.latest_number].select("div.wr-subject > a > span.tack-icon")[0].text
         link = posts[constants.latest_number].select("div.wr-subject > a")[0]['href']
@@ -54,7 +54,7 @@ def nt_notify():
             number = posts[constants.latest_number+1].select("div.wr-num.hidden-xs")[0].text
             time = posts[constants.latest_number+1].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
             downloads = posts[constants.latest_number+1].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
-            title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text[9:-3].replace("	", "").lstrip().rstrip()
+            title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text[5:-1].replace("	", "").lstrip().rstrip()
             member = posts[constants.latest_number+1].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
             category = posts[constants.latest_number+1].select("div.wr-subject > a > span.tack-icon")[0].text
             link = posts[constants.latest_number+1].select("div.wr-subject > a")[0]['href']
