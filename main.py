@@ -4,7 +4,7 @@ import os
 import constants
 
 def nt_notify():
-    with requests.get("https://newtoki118.com/toki_free", headers=constants.headers) as req:
+    with requests.get("https://newtoki119.com/toki_free", headers=constants.headers) as req:
         html = req.text
         soup = BeautifulSoup(html, 'html.parser')
         posts = soup.select("#list-body > li")
