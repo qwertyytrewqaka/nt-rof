@@ -6,6 +6,7 @@ import constants
 def nt_notify():
     with requests.get("https://newtoki121.com/toki_free", headers=constants.headers) as req:
         called = False
+        constants.k_number = 0
         k_list = []
         html = req.text
         soup = BeautifulSoup(html, 'html.parser')
@@ -88,6 +89,7 @@ def nt_notify():
 
         with open(os.path.join(constants.BASE_DIR, 'latest_k.txt'), 'r+') as f_read:
             before_number_k = int(f_read.readline())
+            print(before_number_k, constants.k_number)
             if before_number_k != constants.k_number:
                 with open(os.path.join(constants.BASE_DIR, "latest_k.txt"), "w+") as f_write:
                     f_write.write(str(constants.k_number))
