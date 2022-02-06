@@ -64,11 +64,11 @@ def nt_notify():
             number = posts[constants.latest_number+1].select("div.wr-num.hidden-xs")[0].text
             time = posts[constants.latest_number+1].select("div.wr-date.hidden-xs")[0].text[1:].rstrip()
             downloads = posts[constants.latest_number+1].select("div.wr-down.hidden-xs")[0].text[1:].rstrip()
+            category = posts[constants.latest_number+1].select("div.wr-subject > a > span.tack-icon")[0].text
             talk_temp = posts[constants.latest_number+1].select("div.wr-subject > a > span.count.orangered.hidden-xs")
             talk = talk_temp[0].text if len(talk_temp) != 0 else ""
             title = posts[constants.latest_number+1].select("div.wr-subject > a")[0].text.replace(category, "").replace(talk, "").replace("	", "").lstrip().rstrip()
             member = posts[constants.latest_number+1].select("div.wr-name.hidden-xs > a > span")[0].text.lstrip()
-            category = posts[constants.latest_number+1].select("div.wr-subject > a > span.tack-icon")[0].text
             link = posts[constants.latest_number+1].select("div.wr-subject > a")[0]['href']
 
             print("두번째:", number, time, downloads, title, member, category, link)
