@@ -10,3 +10,4 @@ history = ["", "", "", "", "", ""]
 server_state = 0
 errorcount = 0
 latest_number = 0
+k_number = 0
