@@ -4,7 +4,7 @@ import os
 import constants
 
 def nt_notify():
-    with requests.get("https://newtoki141.com/toki_free", headers=constants.headers) as req:
+    with requests.get("https://newtoki152.com/toki_free", headers=constants.headers) as req:
         called = False
         constants.k_number = 0
         k_list = []
